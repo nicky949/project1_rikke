@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Home</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+
+<body>
+    <h1>Danh sách nhân viên</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Họ và tên</th>
+                <th>Địa chỉ</th>
+                <th>Điện thoại</th>
+                <th>Trạng thái</th>
+            </tr>
+        </thead>
+        <tbody>
+            <a th:href="@{/send_create}">
+                <button>➕ Create Employee</button>
+            </a>
+            <tr th:each="e : ${list}">
+                <td th:text="${e.id}">1</td>
+                <td th:text="${e.fullName}">Nguyễn A</td>
+                <td th:text="${e.address}">Hanoi</td>
+                <td th:text="${e.phone}">0123456789</td>
+                <td th:text="${e.status} ? 'Đang làm việc' : 'Đã nghỉ'">Đang làm việc</td>
+                <td>
+                    <!-- Update -->
+                    <a th:href="@{/send_update/{id}(id=${e.id})}">
+                        <button>✏️ Update</button>
+                    </a>
+
+                    <!-- Delete -->
+                    <a th:href="@{/delete/{id}(id=${e.id})}" onclick="return confirm('Bạn có chắc muốn xóa không?')">
+                        <button>🗑 Delete</button>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+
+</html>
